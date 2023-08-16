@@ -1,4 +1,4 @@
-# <a href="https://e-commerce-deshboard.vercel.app" target="_blank">SereneJourney Tours</a>
+# <a href="" target="_blank">SereneJourney Tours</a>
 Web paltform where you can find the best travel package for yourself<br/>
 
 # 🛠️ Stack 
