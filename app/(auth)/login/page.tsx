@@ -15,7 +15,6 @@ const Login = () => {
     })
 
     async function onSubmit(values: any) {
-        console.log(values)
     }
 
     return ( 

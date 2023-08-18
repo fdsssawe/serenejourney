@@ -17,9 +17,10 @@ export const authConfig : AuthOptions = {
       CredentialsProvider({
           name: "credentials",
           credentials: {
+              name: { label: "Name", type: "text", placeholder: "John Smith" },
+              surname: { label: "Surname", type: "text", placeholder: "John Smith" },
               email: { label: "Email", type: "text", placeholder: "jsmith" },
               password: { label: "Password", type: "password" },
-              username: { label: "Username", type: "text", placeholder: "John Smith" },
           },
           async authorize(credentials : any) {
             
@@ -57,4 +58,7 @@ export const authConfig : AuthOptions = {
       strategy: "jwt",
   },
   debug: process.env.NODE_ENV === "development",
+//   pages: {
+//     signIn : "/login",
+//   }
 }
