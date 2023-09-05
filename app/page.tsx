@@ -1,17 +1,22 @@
-import { getServerSession } from 'next-auth'
-import { authConfig } from '@/configs/auth'
-import User from '@/components/User'
+"use client"
 
-export default async function Home() {
-  const session = await getServerSession(authConfig)
+import User from '@/components/User'
+import { useEffect } from 'react'
+import { useStore } from '@/store'
+
+export default function Home() {
+
+  const {checkAuth} = useStore()
+
+  useEffect(()=>{
+    if(localStorage.getItem('token')){
+      checkAuth()
+    }
+  },[])
 
   return (
-    <section>
-      <h1>Home</h1>
-      <h1>Server Side Rendered</h1>
-      <pre>{JSON.stringify(session)}</pre>
-      <h1>Client Side Rendered</h1>
-      <User />
-    </section>
+    <div>
+      <User/>
+    </div>
   )
 }

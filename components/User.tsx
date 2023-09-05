@@ -1,12 +1,13 @@
 'use client'
 
-import { useSession } from 'next-auth/react'
+import { useStore } from "@/store"
+
 
 export default function User() {
-    const { data: session } = useSession()
+  const {user} = useStore()
   return (
     <div>
-        {JSON.stringify(session)}
+        {user.email}
     </div>
   )
 }

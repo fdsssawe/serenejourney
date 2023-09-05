@@ -2,18 +2,30 @@
 import { User } from "@prisma/client";
 import { MoreHorizontal } from "lucide-react";
 import {Menu , Transition} from "@headlessui/react"
-import { Fragment } from "react";
+import { Fragment , useRef , useEffect} from "react";
+import { useSession } from "next-auth/react";
+
 
 interface UsersListProps{
     users : User[]
 }
 
 const UsersList : React.FC<UsersListProps> = ({users}) => {
+
+    const session = useSession()
+    useEffect(()=>{
+        if(session.status=="loading"){
+            console.log("loading")
+        }
+        else{
+            console.log(session)
+        }
+    },[session])
     return ( 
         <div className="flex flex-wrap -m-2">
         {users ?
             users.map((user)=>(
-            <div className="p-2 lg:w-1/3 md:w-1/2 w-full">
+            <div className="p-2 lg:w-1/3 md:w-1/2 w-full" key={user?.id}>
                 <div className="h-full flex items-center border-gray-200 border p-4 rounded-lg">
                 <svg width="70" height="70" viewBox="0 0 88 88" fill="none" xmlns="http://www.w3.org/2000/svg" className="mr-4">
                 <circle cx="44" cy="44" r="44" fill="#6366F1"/>
@@ -25,27 +37,38 @@ const UsersList : React.FC<UsersListProps> = ({users}) => {
                    <p className="text-gray-500">{user?.email}</p>
                </div>
 
-               <Menu as="div" className="mr-4">
+               <Menu as="div" className="relative inline-block text-left">
+                {/* Render no wrapper, instead pass in a button manually. */}
                 <div>
-                <Menu.Button>
-                <MoreHorizontal/>
+                <Menu.Button as={Fragment}>
+                    <MoreHorizontal />
                 </Menu.Button>
                 </div>
-                <Transition
-                as={Fragment}
+                <Transition as={Fragment}
                 enter="transition ease-out duration-100"
                 enterFrom="transform opacity-0 scale-95"
                 enterTo="transform opacity-100 scale-100"
                 leave="transition ease-in duration-75"
                 leaveFrom="transform opacity-100 scale-100"
                 leaveTo="transform opacity-0 scale-95"
-                />
-                <div>
-                <Menu.Item>
-                    Delete user
-                </Menu.Item>
+                >
+                <Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                <div className="px-1 py-1 ">
+                    <Menu.Item>
+                    {({ active }) => (
+                        <a
+                        className={`${active && "bg-blue-500"}`}
+                        href="/account-settings"
+                        >
+                        Account settings
+                        </a>
+                    )}
+                    </Menu.Item>
                 </div>
-               </Menu>
+                    {/* ... */}
+                </Menu.Items>
+                </Transition>
+                </Menu>
                </div>
            </div>
             ))

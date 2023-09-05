@@ -2,8 +2,11 @@
 
 import login_validate from "@/lib/validate";
 import { useFormik } from "formik";
+import { useStore } from "@/store";
 
 const Login = () => {
+
+    const {login} = useStore()
 
     const formik = useFormik({
         initialValues: {
@@ -14,7 +17,8 @@ const Login = () => {
         onSubmit,
     })
 
-    async function onSubmit(values: any) {
+    async function onSubmit(values: {email : string , password : string}) {
+      login(values)
     }
 
     return ( 
