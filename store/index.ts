@@ -6,6 +6,8 @@ import { API_URL } from "@/http";
 interface useStoreParams {
     isAuth: boolean;
     user: any;
+    users : any;
+    setUsers: (newState : any) => void;
     isLoading: boolean;
     login: ({
       email,
@@ -18,6 +20,10 @@ interface useStoreParams {
   }
 
 export const useStore = create<useStoreParams>((set) => ({
+    users : [],
+    setUsers : (newState : any) => {
+        set({users : newState})
+    },
     isAuth: false,
     user: {},
     isLoading: false,

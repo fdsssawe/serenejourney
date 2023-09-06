@@ -1,7 +1,8 @@
 import api from "../http";
 
 export default class UserService {
-    static fetchUsers() {
-        return api.get('http://localhost:5000/users')
+    static async fetchUsers(setUsers : any) {
+        const users = await api.get('/users')
+        setUsers(users.data)
     }
 }

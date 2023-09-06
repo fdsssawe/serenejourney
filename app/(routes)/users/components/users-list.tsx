@@ -2,30 +2,30 @@
 import { User } from "@prisma/client";
 import { MoreHorizontal } from "lucide-react";
 import {Menu , Transition} from "@headlessui/react"
-import { Fragment , useRef , useEffect} from "react";
+import { Fragment , useRef , useEffect, useState} from "react";
 import { useSession } from "next-auth/react";
+import UserService from "@/services/UserService";
+import { useStore } from "@/store";
 
 
 interface UsersListProps{
-    users : User[]
+    users : [{
+            _id: string;
+            name: string | null;
+            surname: string | null;
+            email: string | null;
+            isAdmin: boolean | null;
+            }]
 }
 
 const UsersList : React.FC<UsersListProps> = ({users}) => {
 
-    const session = useSession()
-    useEffect(()=>{
-        if(session.status=="loading"){
-            console.log("loading")
-        }
-        else{
-            console.log(session)
-        }
-    },[session])
+
     return ( 
         <div className="flex flex-wrap -m-2">
         {users ?
             users.map((user)=>(
-            <div className="p-2 lg:w-1/3 md:w-1/2 w-full" key={user?.id}>
+            <div className="p-2 lg:w-1/3 md:w-1/2 w-full" key={user?._id}>
                 <div className="h-full flex items-center border-gray-200 border p-4 rounded-lg">
                 <svg width="70" height="70" viewBox="0 0 88 88" fill="none" xmlns="http://www.w3.org/2000/svg" className="mr-4">
                 <circle cx="44" cy="44" r="44" fill="#6366F1"/>
