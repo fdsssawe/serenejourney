@@ -1,5 +1,5 @@
 "use client"
-import { User } from "@prisma/client";
+
 import { MoreHorizontal } from "lucide-react";
 import {Menu , Transition} from "@headlessui/react"
 import { Fragment , useRef , useEffect, useState} from "react";
@@ -20,12 +20,14 @@ interface UsersListProps{
 
 const UsersList : React.FC<UsersListProps> = ({users}) => {
 
+    const {user} = useStore()
+    console.log(user)
 
     return ( 
         <div className="flex flex-wrap -m-2">
         {users ?
-            users.map((user)=>(
-            <div className="p-2 lg:w-1/3 md:w-1/2 w-full" key={user?._id}>
+            users.map((specificUser)=>(
+            <div className="p-2 lg:w-1/3 md:w-1/2 w-full" key={specificUser?._id}>
                 <div className="h-full flex items-center border-gray-200 border p-4 rounded-lg">
                 <svg width="70" height="70" viewBox="0 0 88 88" fill="none" xmlns="http://www.w3.org/2000/svg" className="mr-4">
                 <circle cx="44" cy="44" r="44" fill="#6366F1"/>
@@ -33,8 +35,8 @@ const UsersList : React.FC<UsersListProps> = ({users}) => {
                 </svg>
 
                 <div className="flex-grow">
-                   <h2 className="text-gray-900 title-font font-medium">{user?.name} {user?.surname}</h2>
-                   <p className="text-gray-500">{user?.email}</p>
+                   <h2 className="text-gray-900 title-font font-medium">{specificUser?.name} {specificUser?.surname}</h2>
+                   <p className="text-gray-500">{specificUser?.email}</p>
                </div>
 
                <Menu as="div" className="relative inline-block text-left">
@@ -52,16 +54,16 @@ const UsersList : React.FC<UsersListProps> = ({users}) => {
                 leaveFrom="transform opacity-100 scale-100"
                 leaveTo="transform opacity-0 scale-95"
                 >
-                <Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                <div className="px-1 py-1 ">
+                <Menu.Items className="w-fit absolute right-0 mt-2 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                <div className="mx-2 py-1 w-[5.45rem]">
                     <Menu.Item>
                     {({ active }) => (
-                        <a
+                        <div
                         className={`${active && "bg-blue-500"}`}
-                        href="/account-settings"
+                        onClick={()=>UserService.deleteUser(user.isAdmin , specificUser._id )}
                         >
-                        Account settings
-                        </a>
+                        Delete user
+                        </div>
                     )}
                     </Menu.Item>
                 </div>
