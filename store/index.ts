@@ -2,12 +2,11 @@ import {create} from "zustand"
 import AuthService from "@/services/AuthService";
 import axios from "axios";
 import { API_URL } from "@/http";
+import api from "@/http";
 
 interface useStoreParams {
     isAuth: boolean;
     user: any;
-    users : any;
-    setUsers: (newState : any) => void;
     isLoading: boolean;
     login: ({
       email,
@@ -17,13 +16,10 @@ interface useStoreParams {
       password: string;
     }) => Promise<any>;
     checkAuth: () => Promise<any>;
+    logout: () => Promise<any>;
   }
 
 export const useStore = create<useStoreParams>((set) => ({
-    users : [],
-    setUsers : (newState : any) => {
-        set({users : newState})
-    },
     isAuth: false,
     user: {},
     isLoading: false,
@@ -49,12 +45,20 @@ export const useStore = create<useStoreParams>((set) => ({
             set({isLoading : true})
             const response = await axios.get(`${API_URL}/refresh`, { withCredentials: true });
             localStorage.setItem('token', response.data.accessToken);
+            console.log(response)
             set({user : response.data.user})
             set({isLoading : false})
+            set({isAuth : true})
             return response.data.user;
         }
         catch(e : any){
             console.log("Error checking authorization")
         }
+    },
+    logout : async () => {
+      await api.post('/logout')
+      localStorage.removeItem('token');
+      set({isAuth : false})
+      set({user : {}})
     }
 }))

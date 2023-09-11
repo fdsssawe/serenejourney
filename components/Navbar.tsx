@@ -2,10 +2,11 @@
 
 
 import { useRouter } from "next/navigation"
-import {ArrowRightSquare} from "lucide-react"
+import {LogOut , LogIn} from "lucide-react"
+import { useStore } from "@/store"
 
 const Navbar = () => {
-
+    const states = useStore()
     const router = useRouter()
     return ( 
         <header className="text-gray-600 body-font">
@@ -22,8 +23,20 @@ const Navbar = () => {
             </svg>
             <span className="ml-3 text-xl">SereneJourney Tours</span>
             </a>
-            <div className="lg:w-2/5 inline-flex lg:justify-end ml-5 lg:ml-0">
+            {states.isAuth ? 
+            <div className="lg:w-2/5 inline-flex lg:justify-end ml-5 lg:ml-0 gap-2 cursor-pointer items-center" onClick={()=> {
+            states.logout() 
+            router.push("/")
+            }}>
+                Log Out
+                <LogOut size="21" />
             </div>
+            :
+            <div className="lg:w-2/5 inline-flex lg:justify-end ml-5 lg:ml-0 gap-2 cursor-pointer items-center" onClick={() => router.push("/login")}>
+                Sign In
+                <LogIn size="21" />
+            </div>
+            }   
         </div>
         </header>
      );

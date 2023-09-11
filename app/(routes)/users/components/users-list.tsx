@@ -20,8 +20,12 @@ interface UsersListProps{
 
 const UsersList : React.FC<UsersListProps> = ({users}) => {
 
-    const {user} = useStore()
+    const user = useStore((state)=>state.user)
     console.log(user)
+
+    useEffect(()=>{
+
+    },[user])
 
     return ( 
         <div className="flex flex-wrap -m-2">
@@ -40,7 +44,6 @@ const UsersList : React.FC<UsersListProps> = ({users}) => {
                </div>
 
                <Menu as="div" className="relative inline-block text-left">
-                {/* Render no wrapper, instead pass in a button manually. */}
                 <div>
                 <Menu.Button as={Fragment}>
                     <MoreHorizontal />
@@ -55,19 +58,18 @@ const UsersList : React.FC<UsersListProps> = ({users}) => {
                 leaveTo="transform opacity-0 scale-95"
                 >
                 <Menu.Items className="w-fit absolute right-0 mt-2 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                <div className="mx-2 py-1 w-[5.45rem]">
+                <div className="mx-2 py-1 w-[7.2rem]">
                     <Menu.Item>
                     {({ active }) => (
                         <div
                         className={`${active && "bg-blue-500"}`}
                         onClick={()=>UserService.deleteUser(user.isAdmin , specificUser._id )}
                         >
-                        Delete user
+                        Delete account
                         </div>
                     )}
                     </Menu.Item>
                 </div>
-                    {/* ... */}
                 </Menu.Items>
                 </Transition>
                 </Menu>
