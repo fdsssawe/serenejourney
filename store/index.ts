@@ -30,7 +30,6 @@ export const useStore = create<useStoreParams>((set) => ({
             localStorage.setItem('token', response.data.accessToken);
             set({isAuth : true})
             set({user : response.data.user})
-            console.log(response.data.user)
             set({isLoading : false})
             window.location.href = 'http://localhost:3000/' 
             return response.data.user;
@@ -45,7 +44,6 @@ export const useStore = create<useStoreParams>((set) => ({
             set({isLoading : true})
             const response = await axios.get(`${API_URL}/refresh`, { withCredentials: true });
             localStorage.setItem('token', response.data.accessToken);
-            console.log(response)
             set({user : response.data.user})
             set({isLoading : false})
             set({isAuth : true})

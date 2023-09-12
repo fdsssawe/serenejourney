@@ -1,18 +1,21 @@
 "use client"
 
 import User from '@/components/User'
-import { useEffect } from 'react'
+import { useEffect , useState } from 'react'
 import { useStore } from '@/store'
 
 export default function Home() {
 
-  const {checkAuth} = useStore()
+  const {user} = useStore()
+  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(()=>{
-    if(localStorage.getItem('token')){
-      checkAuth()
-    }
-  },[])
+    setIsMounted(true);
+},[])
+  
+  if (!isMounted) {
+    null
+  }
 
   return (
     <div>

@@ -3,7 +3,6 @@
 import { MoreHorizontal } from "lucide-react";
 import {Menu , Transition} from "@headlessui/react"
 import { Fragment , useRef , useEffect, useState} from "react";
-import { useSession } from "next-auth/react";
 import UserService from "@/services/UserService";
 import { useStore } from "@/store";
 
@@ -21,11 +20,7 @@ interface UsersListProps{
 const UsersList : React.FC<UsersListProps> = ({users}) => {
 
     const user = useStore((state)=>state.user)
-    console.log(user)
 
-    useEffect(()=>{
-
-    },[user])
 
     return ( 
         <div className="flex flex-wrap -m-2">
@@ -58,14 +53,25 @@ const UsersList : React.FC<UsersListProps> = ({users}) => {
                 leaveTo="transform opacity-0 scale-95"
                 >
                 <Menu.Items className="w-fit absolute right-0 mt-2 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                <div className="mx-2 py-1 w-[7.2rem]">
+                <div className="mx-1.5 py-1">
                     <Menu.Item>
                     {({ active }) => (
                         <div
-                        className={`${active && "bg-blue-500"}`}
-                        onClick={()=>UserService.deleteUser(user.isAdmin , specificUser._id )}
+                        className={`${active && "bg-gray-200 rounded-sm "} px-1.5`}
+                        onClick={()=>UserService.deleteUser(user.isAdmin , specificUser )}
                         >
                         Delete account
+                        </div>
+                    )}
+                    </Menu.Item>
+                </div>
+                <div className="mx-1.5 py-1 w-[9rem]">
+                    <Menu.Item>
+                    {({ active }) => (
+                        <div
+                        className={`${active && "bg-gray-200 rounded-sm"} px-1.5`}
+                        >
+                        Resset password
                         </div>
                     )}
                     </Menu.Item>

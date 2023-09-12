@@ -32,9 +32,6 @@ const Users = () => {
     }
 
     useEffect(()=>{
-        if(localStorage.getItem('token')){
-            checkAuth()
-          }
         fetchUsers(setUsers)
         setIsMounted(true);
     },[])
@@ -54,9 +51,19 @@ const Users = () => {
     return ( 
         <section className="text-gray-600 body-font">
         <div className="container px-5 py-24 mx-auto">
-            <div className="flex flex-col text-center w-full mb-20">
+            <div className="flex flex-col text-center w-full  border-b-gray-400 border-b-[3px] mb-10 rounded-sm ">
             <h1 className="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">Users panel</h1>
             <p className="lg:w-2/3 mx-auto leading-relaxed text-base">Here you can manipulate with users accounts , resset their passwords, ban users, check their packages , etc.</p>
+            <div className="pb-20 relative mb-2">
+                <div className="absolute right-0 bottom-0">
+                    <button className="bg-indigo-500 py-1 px-2 rounded-lg text-white mr-2 w-[5.3rem]">
+                        Refresh
+                    </button>
+                    <button className="bg-indigo-500 py-1 px-2 rounded-lg text-white w-[5.3rem]">
+                        Add user
+                    </button>
+                </div>
+            </div>
             </div>
             {users.length > 1 || users[0]._id != "1" ? <UsersList users={users}/> : <div className="w-full text-center">Loading ...</div>}
 

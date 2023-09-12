@@ -4,8 +4,15 @@ import api from "../http";
 export default class UserService {
 
     
-    static async deleteUser(isAdmin : boolean , id : string) {
+    static async deleteUser(isAdmin : boolean , user : {
+        _id: string;
+        name: string | null;
+        surname: string | null;
+        email: string | null;
+        isAdmin: boolean | null;
+        }) {
         if(isAdmin){
+            const id = user._id
             await api.post("/deleteuser",{id})
             toast.success("User deleted")
             return true
