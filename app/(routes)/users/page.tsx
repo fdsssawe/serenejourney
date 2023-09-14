@@ -3,7 +3,9 @@
 import UsersList from "./components/users-list";
 import api from "@/http";
 import { useEffect, useState } from "react";
-import { useStore } from "@/store";
+import { useModalUCProvider } from "@/hooks/modal-uc-provider";
+import Modal from "./components/modal";
+
 
 interface users {
     _id: string;
@@ -15,8 +17,8 @@ interface users {
 
 const Users = () => {
 
-    const {checkAuth} = useStore()
     const [isMounted, setIsMounted] = useState(false);
+    const openModal = useModalUCProvider((state)=>state.openModal)
     
     const [users , setUsers] = useState<[users]>([{
         _id: "1",
@@ -50,6 +52,7 @@ const Users = () => {
 
     return ( 
         <section className="text-gray-600 body-font">
+        <Modal/>
         <div className="container px-5 py-24 mx-auto">
             <div className="flex flex-col text-center w-full  border-b-gray-400 border-b-[3px] mb-10 rounded-sm ">
             <h1 className="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">Users panel</h1>
@@ -59,7 +62,7 @@ const Users = () => {
                     <button className="bg-indigo-500 py-1 px-2 rounded-lg text-white mr-2 w-[5.3rem]">
                         Refresh
                     </button>
-                    <button className="bg-indigo-500 py-1 px-2 rounded-lg text-white w-[5.3rem]">
+                    <button className="bg-indigo-500 py-1 px-2 rounded-lg text-white w-[5.3rem]" onClick={()=>openModal()}>
                         Add user
                     </button>
                 </div>

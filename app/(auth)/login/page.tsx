@@ -22,27 +22,6 @@ const Login = () => {
     }
 
     return ( 
-    //     <div className="rounded-lg p-8 flex-col w-full flex justify-center border-2">
-    // <form onSubmit={formik.handleSubmit} className="flex flex-col w-3/12 border-2">
-    //   <label htmlFor="email">Email Address</label>
-    //   <input
-    //     id="email"
-    //     type="email"
-    //     {...formik.getFieldProps('email')}
-    //     className="border-1"
-    //   />
-    //   {formik.errors.email && formik.touched.email ? <span className="text-red-500">{formik.errors.email}</span> : null}
-    //   <label htmlFor="password">Password</label>
-    //   <input
-    //     id="password"
-    //     type="text"
-    //     {...formik.getFieldProps('password')}
-    //   /> 
-    //   {formik.errors.password && formik.touched.password ? <span className="text-red-500">{formik.errors.password}</span> : null}
-
-    //   <button type="submit">Submit</button>
-    // </form>
-    //     </div>
     <div className="flex lg:mt-32  flex-col justify-center px-6 py-12 lg:px-8">
   <div className="sm:mx-auto sm:w-full sm:max-w-sm">
     <img className="mx-auto h-10 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="Your Company"/>
