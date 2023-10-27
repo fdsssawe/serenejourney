@@ -15,6 +15,9 @@ interface useStoreParams {
       email: string;
       password: string;
     }) => Promise<any>;
+    registration: ({ name, surname, email, password, cpassword } : 
+      {name : string,  surname : string, email : string , password : string, cpassword : string})
+       => Promise<any>;
     checkAuth: () => Promise<any>;
     logout: () => Promise<any>;
   }
@@ -39,6 +42,22 @@ export const useStore = create<useStoreParams>((set) => ({
               throw new Error(e.response?.data?.message);
             }
     },
+    registration: async ({ name, surname, email, password, cpassword } : {name : string,  surname : string, email : string , password : string, cpassword : string}) => {
+      try{
+          set({isLoading : true})
+          const response = await AuthService.registration(name, surname, email, password, cpassword);
+          localStorage.setItem('token', response.data.accessToken);
+          set({isAuth : true})
+          set({user : response.data.user})
+          set({isLoading : false})
+          window.location.href = 'http://localhost:3000/' 
+          return response.data.user;
+          }
+          catch(e : any){
+            set({isLoading : false})
+            throw new Error(e.response?.data?.message);
+          }
+  },
     checkAuth: async () => {
         try{
             set({isLoading : true})

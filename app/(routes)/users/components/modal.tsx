@@ -3,11 +3,31 @@
 import { useModalUCProvider } from '@/hooks/modal-uc-provider';
 import { Dialog, Transition } from '@headlessui/react'
 import { Fragment, useState } from 'react'
+import { useFormik } from "formik";
+import { useStore } from "@/store";
+import { register_validate } from '@/lib/validate';
 
 export default function Modal() {
 
 
     const {isOpen , closeModal } = useModalUCProvider()
+    const {registration} = useStore()
+
+    const formik = useFormik({
+      initialValues: {
+          name:'',
+          surname:'',
+          email :'',
+          password:'',
+          cpassword:'',
+      },
+      validate: register_validate,
+      onSubmit,
+  })
+
+  async function onSubmit(values: {name : string,  surname : string, email : string , password : string, cpassword : string}) {
+    registration(values)
+  }
 
   return (
     <>
@@ -44,31 +64,34 @@ export default function Modal() {
                         <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>  
                     </button>
                 </div>
-                <form className="space-y-6 px-6 lg:px-8 pb-4 sm:pb-6 xl:pb-8" action="#">
-                    <h3 className="text-xl font-medium text-gray-900 ">Sign in to our platform</h3>
+                <form className="space-y-6 px-6 lg:px-8 pb-4 sm:pb-6 xl:pb-8" action="#" onSubmit={formik.handleSubmit}>
+                    <h3 className="text-xl font-medium text-gray-900 ">Create new user</h3>
                     <div>
-                        <label htmlFor="email" className="text-sm font-medium text-gray-900 block mb-2 ">Your email</label>
-                        <input type="email" name="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5" placeholder="sj@company.com" />
+                        <label htmlFor="name" className="text-sm font-medium text-gray-900 block mb-2 ">User name</label>
+                        <input type="name" {...formik.getFieldProps('name')} name="name" id="name" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5" placeholder="John" />
+                        {formik.errors.name && formik.touched.name ? <span className="text-red-500 text-sm">{formik.errors.name}</span> : null}
                     </div>
                     <div>
-                        <label htmlFor="password" className="text-sm font-medium text-gray-900 block mb-2 ">Your password</label>
-                        <input type="password" name="password" id="password" placeholder="••••••••" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5" />
+                        <label htmlFor="surname" className="text-sm font-medium text-gray-900 block mb-2 ">User surname</label>
+                        <input type="surname" {...formik.getFieldProps('surname')} name="surname" id="surname" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5" placeholder="Doe" />
+                        {formik.errors.surname && formik.touched.surname ? <span className="text-red-500 text-sm">{formik.errors.surname}</span> : null}
                     </div>
-                    <div className="flex justify-between">
-                        <div className="flex items-start">
-                            <div className="flex items-center h-5">
-                                <input id="remember" aria-describedby="remember" type="checkbox" className="bg-gray-50 border border-gray-300 focus:ring-3 focus:ring-blue-300 h-4 w-4 rounded dark:bg-gray-600 dark:border-gray-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800" />
-                            </div>
-                            <div className="text-sm ml-3">
-                            <label htmlFor="remember" className="font-medium text-gray-900 dark:text-gray-300">Remember me</label>
-                            </div>
-                        </div>
-                        <a href="#" className="text-sm text-blue-700 hover:underline dark:text-indigo-500">Lost Password?</a>
+                    <div>
+                        <label htmlFor="email" className="text-sm font-medium text-gray-900 block mb-2 ">User email</label>
+                        <input type="email" {...formik.getFieldProps('email')} name="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5" placeholder="sj@company.com" />
+                        {formik.errors.email && formik.touched.email ? <span className="text-red-500 text-sm">{formik.errors.email}</span> : null}
                     </div>
-                    <button type="submit" className="w-full text-white focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-indigo-500 hover:bg-indigo-700 focus:ring-indigo-200">Login to your account</button>
-                    <div className="text-sm font-medium text-gray-500 dark:text-gray-300">
-                        Not registered? <a href="#" className=" hover:underline text-indigo-500">Create account</a>
+                    <div>
+                        <label htmlFor="password" className="text-sm font-medium text-gray-900 block mb-2 ">User password</label>
+                        <input type="password" {...formik.getFieldProps('password')} name="password" id="password" placeholder="••••••••" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5" />
+                        {formik.errors.password && formik.touched.password ? <span className="text-red-500">{formik.errors.password}</span> : null}
                     </div>
+                    <div>
+                        <label htmlFor="cpassword" className="text-sm font-medium text-gray-900 block mb-2 ">User cpassword</label>
+                        <input type="cpassword" {...formik.getFieldProps('cpassword')} name="cpassword" id="cpassword" placeholder="••••••••" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5" />
+                        {formik.errors.cpassword && formik.touched.cpassword ? <span className="text-red-500">{formik.errors.cpassword}</span> : null}
+                    </div>
+                    <button type="submit" className="w-full text-white focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-indigo-500 hover:bg-indigo-700 focus:ring-indigo-200">Add user</button>
                 </form>
             </div>
                 </Dialog.Panel>
