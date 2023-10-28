@@ -18,6 +18,9 @@ interface useStoreParams {
     registration: ({ name, surname, email, password, cpassword } : 
       {name : string,  surname : string, email : string , password : string, cpassword : string})
        => Promise<any>;
+    addUser: ({ name, surname, email, password, cpassword } : 
+      {name : string,  surname : string, email : string , password : string, cpassword : string})
+       => Promise<any>;
     checkAuth: () => Promise<any>;
     logout: () => Promise<any>;
   }
@@ -57,9 +60,23 @@ export const useStore = create<useStoreParams>((set) => ({
             set({isLoading : false})
             throw new Error(e.response?.data?.message);
           }
+    },
+    addUser: async ({ name, surname, email, password, cpassword } : {name : string,  surname : string, email : string , password : string, cpassword : string}) => {
+      try{
+          set({isLoading : true})
+          const response = await AuthService.addUser(name, surname, email, password, cpassword);
+          set({isLoading : false})
+          window.location.href = 'http://localhost:3000/' 
+          return response.data.user;
+          }
+          catch(e : any){
+            set({isLoading : false})
+            throw new Error(e.response?.data?.message);
+          }
   },
     checkAuth: async () => {
         try{
+          console.log("fdfd")
             set({isLoading : true})
             const response = await axios.get(`${API_URL}/refresh`, { withCredentials: true });
             localStorage.setItem('token', response.data.accessToken);

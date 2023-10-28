@@ -9,6 +9,10 @@ export default class AuthService{
         return api.post('/registration', {name, surname, email, password, cpassword})
     }  
 
+    static async addUser( name : string,  surname : string, email : string , password : string, cpassword : string){
+        return api.post('/addUser', {name, surname, email, password, cpassword})
+    }  
+
     static async logout(){
         return api.post('/logout')
     }  

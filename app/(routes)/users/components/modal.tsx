@@ -11,7 +11,7 @@ export default function Modal() {
 
 
     const {isOpen , closeModal } = useModalUCProvider()
-    const {registration} = useStore()
+    const {addUser , user} = useStore()
 
     const formik = useFormik({
       initialValues: {
@@ -25,8 +25,9 @@ export default function Modal() {
       onSubmit,
   })
 
+
   async function onSubmit(values: {name : string,  surname : string, email : string , password : string, cpassword : string}) {
-    registration(values)
+    addUser(values)
   }
 
   return (
