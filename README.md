@@ -36,7 +36,7 @@ SECRET = secret that will be used to generate jwt tokens by Next Auth
 
 2. ### Admin dashboard functionality
     
-    - [ ] Users manipulation
+    - [x] Users manipulation
     - [ ] Travel packages manipulation
     - [ ] Hotels manipulation
     - [ ] Manageble blog
