@@ -66,7 +66,6 @@ export const useStore = create<useStoreParams>((set) => ({
           set({isLoading : true})
           const response = await AuthService.addUser(name, surname, email, password, cpassword);
           set({isLoading : false})
-          window.location.href = 'http://localhost:3000/' 
           return response.data.user;
           }
           catch(e : any){
