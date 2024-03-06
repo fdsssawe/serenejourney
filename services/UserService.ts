@@ -22,4 +22,10 @@ export default class UserService {
             return false
         }
     }
+
+    static async SetPasswordManually(id: string, password: string) {
+            await api.post("/changePassword",{id, password})
+            toast.success("Password changed successfully")
+            return true
+    }
 }
