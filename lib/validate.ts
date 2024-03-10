@@ -77,3 +77,23 @@ export function PC_validate(values : {password : string}): object{
 
     return errors
 }
+
+export function UP_validate(values : {name : string, surname: string}): object{
+    const errors : any = {}
+    
+    //name validatio
+    if(!values.name){
+        errors.name = "Required"
+      }else if(values.name.includes(" ")){
+          errors.name = 'Invalid Name';
+      }
+  
+      //surname validatio
+      if(!values.surname){
+          errors.surname = "Required"
+      }else if(values.surname.includes(" ")){
+          errors.surname = 'Invalid Surname';
+      }
+
+    return errors
+}

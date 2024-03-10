@@ -6,7 +6,8 @@ import { Fragment , useRef , useEffect, useState} from "react";
 import UserService from "@/services/UserService";
 import { useStore } from "@/store";
 import ModalPC from "./modal-password-change";
-import { useModalPCProvider } from "@/hooks/modal-uc-provider";
+import { useModalPCProvider, useModalUPProvider } from "@/hooks/modal-uc-provider";
+import ModalUP from "./modal-profile-update";
 
 
 
@@ -24,11 +25,13 @@ const UsersList : React.FC<UsersListProps> = ({users}) => {
 
     const user = useStore((state)=>state.user)
     const openModal = useModalPCProvider((state)=>state.openModal)
+    const openModalUP = useModalUPProvider((state)=>state.openModalUP)
 
 
     return ( 
         <div className="flex flex-wrap -m-2">
         <ModalPC/>
+        <ModalUP/>
         {users ?
             users.map((specificUser)=>(
             <div className="p-2 lg:w-1/3 md:w-1/2 w-full" key={specificUser?._id}>
@@ -89,6 +92,18 @@ const UsersList : React.FC<UsersListProps> = ({users}) => {
                         onClick={()=>openModal(specificUser._id)}
                         >
                         Set password
+                        </div>
+                    )}
+                    </Menu.Item>
+                </div>
+                <div className="mx-1.5 py-1 w-[9rem]">
+                    <Menu.Item>
+                    {({ active }) => (
+                        <div
+                        className={`${active && "bg-gray-200 rounded-sm"} px-1.5 cursor-pointer`}
+                        onClick={()=>openModalUP(specificUser._id)}
+                        >
+                        Update profile
                         </div>
                     )}
                     </Menu.Item>

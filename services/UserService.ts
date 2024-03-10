@@ -28,4 +28,10 @@ export default class UserService {
             toast.success("Password changed successfully")
             return true
     }
+
+    static async UpdateProfile(id: string, name: string, surname: string) {
+        await api.post("/update-profile",{id, name, surname})
+        toast.success("Profile updated successfully")
+        return true
+}
 }
