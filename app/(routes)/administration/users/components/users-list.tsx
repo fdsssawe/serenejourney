@@ -108,6 +108,18 @@ const UsersList : React.FC<UsersListProps> = ({users}) => {
                     )}
                     </Menu.Item>
                 </div>
+                <div className="mx-1.5 py-1 w-[9rem]">
+                    <Menu.Item>
+                    {({ active }) => (
+                        <div
+                        className={`${active && "bg-gray-200 rounded-sm"} px-1.5 cursor-pointer`}
+                        onClick={()=>openModalUP(specificUser._id)}
+                        >
+                        Update email
+                        </div>
+                    )}
+                    </Menu.Item>
+                </div>
                 </Menu.Items>
                 </Transition>
                 </Menu>
