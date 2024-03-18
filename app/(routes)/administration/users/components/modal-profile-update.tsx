@@ -10,6 +10,7 @@ import UserService from '@/services/UserService';
 export default function ModalUP() {
 
 
+
     const {isOpen , closeModalUP, selectedUser } = useModalUPProvider()
 
     const formik = useFormik({
@@ -23,7 +24,8 @@ export default function ModalUP() {
 
 
   async function onSubmit(values : {name : string, surname: string}) {
-    UserService.UpdateProfile(selectedUser, values.name, values.surname)
+    await UserService.UpdateProfile(selectedUser, values.name, values.surname)
+    closeModalUP()
   }
 
   return (

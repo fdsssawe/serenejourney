@@ -4,13 +4,14 @@
 import { useRouter } from "next/navigation"
 import {LogOut , LogIn} from "lucide-react"
 import { useStore } from "@/store"
+import logo from "../logo.svg"
 
 const Navbar = () => {
     const states = useStore()
     const router = useRouter()
     return ( 
-        <header className="text-gray-600 body-font">
-        <div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+        <header className="text-gray-600 body-font bg-[#ABB6C8]">
+        {/* <div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
             <nav className="flex lg:w-2/5 flex-wrap items-center text-base md:ml-auto">
             <a className="mr-5 hover:text-gray-900" href="/administration/users">Users panel</a>
             <a className="mr-5 hover:text-gray-900">Travel packages</a>
@@ -37,6 +38,17 @@ const Navbar = () => {
                 <LogIn size="21" />
             </div>
             }   
+        </div> */}
+        <div className="flex">
+        <div className="w-[23%] border-2 border-fuchsia-100 h-20 flex justify-center items-center">
+            <div className="h-0 w-[98%] border-[1px] rounded-lg border-[#5D7599]"></div>
+        </div>
+        <div className="w-[12%] border-2 border-fuchsia-500 h-20">
+            
+        </div>
+        <div className="w-[65%] border-2 border-fuchsia-700 h-20">
+        <img src={logo} alt="logo" className="h-20 w-20" />
+        </div>
         </div>
         </header>
      );

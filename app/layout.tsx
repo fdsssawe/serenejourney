@@ -8,7 +8,6 @@ import Navbar from '@/components/Navbar'
 import { useEffect } from 'react'
 import { useStore } from '@/store'
 
-const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -30,8 +29,8 @@ export default function RootLayout({
   },[])
 
   return (
-    <html lang="en">
-      <body className={inter.className}>
+    <html lang="en" >
+      <body className="bg-[#ABB6C8]">
       <Providers>
       <Navbar/>
         {children}

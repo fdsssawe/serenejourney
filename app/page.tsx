@@ -18,7 +18,7 @@ export default function Home() {
   }
 
   return (
-    <div>
+    <div className='bg-[#ABB6C8] h-full'>
       <User/>
     </div>
   )
