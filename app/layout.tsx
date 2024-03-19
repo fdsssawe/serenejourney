@@ -30,7 +30,7 @@ export default function RootLayout({
 
   return (
     <html lang="en" >
-      <body className="bg-[#ABB6C8]">
+      <body className="bg-bg font-main">
       <Providers>
       <Navbar/>
         {children}

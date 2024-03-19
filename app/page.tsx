@@ -3,6 +3,7 @@
 import User from '@/components/User'
 import { useEffect , useState } from 'react'
 import { useStore } from '@/store'
+import Carousel from '@/components/Carousel'
 
 export default function Home() {
 
@@ -18,8 +19,8 @@ export default function Home() {
   }
 
   return (
-    <div className='bg-[#ABB6C8] h-full'>
-      <User/>
+    <div className='bg-bg h-full'>
+      <Carousel/>
     </div>
   )
 }
