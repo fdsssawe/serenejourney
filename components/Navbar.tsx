@@ -75,9 +75,7 @@ const Navbar = () => {
                         <button className=" text-text lg:text-base font-[600]">Packages</button>
                         <button className=" text-text lg:text-base font-[600]">Flights</button>
                         <button className=" text-text lg:text-base font-[600]">Cruise</button>
-                        <button className=" text-text lg:text-base font-[600]">Blogs</button>
-                        <button className=" text-text lg:text-base font-[600]">Blogs</button>
-                        <button className=" text-text lg:text-base font-[600]">Blogs</button>
+                        <button className=" text-text lg:text-base font-[600]" onClick={()=>router.push("/blogs")}>Blogs </button>
                     </div>
                 </div>
             </div>

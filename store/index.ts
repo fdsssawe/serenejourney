@@ -8,6 +8,8 @@ interface useStoreParams {
     isAuth: boolean;
     user: any;
     isLoading: boolean;
+    blogs: {items: any[], status: string};
+    tags: {items: string[], status: string};
     login: ({
       email,
       password,
@@ -23,12 +25,23 @@ interface useStoreParams {
        => Promise<any>;
     checkAuth: () => Promise<any>;
     logout: () => Promise<any>;
+    getBlogs: () => Promise<any>;
+    getTags: () => Promise<any>;
+    deleteBlog: (id: string) => Promise<any>;
   }
 
 export const useStore = create<useStoreParams>((set) => ({
     isAuth: false,
     user: {},
     isLoading: false,
+    blogs: {
+      items: [],
+      status: 'loading',
+    },
+    tags: {
+      items: [],
+      status: 'loading',
+    },
     login: async ({ email , password } : {email : string , password : string}) => {
         try{
             set({isLoading : true})
@@ -93,5 +106,39 @@ export const useStore = create<useStoreParams>((set) => ({
       localStorage.removeItem('token');
       set({isAuth : false})
       set({user : {}})
+    },
+    getBlogs: async () => {
+        try{
+            set({blogs : {items : [], status : 'loading'}})
+            const response = await api.get('/posts')
+            set({blogs : {items : response.data, status : 'loaded'}})
+        }
+        catch(e : any){
+            set({blogs : {items : [], status : 'error'}})
+        }
+    },
+    getTags: async () => {
+        try{
+            set({tags : {items : [], status : 'loading'}})
+            const response = await api.get('/tags')
+            set({tags : {items : response.data, status : 'laoded'}})
+        }
+        catch(e : any){
+            set({tags : {items : [], status : 'error'}})
+        }
+    },
+    deleteBlog: async (id : string) => {
+        try{
+            await api.delete(`/posts/${id}`)
+            set((state) => ({
+                blogs: {
+                  ...state.blogs,
+                  items: state.blogs.items.filter((item) => item.id !== id),
+                },
+              }));
+        }
+        catch(e : any){
+            console.log("Error deleting blog")
+        }
     }
 }))

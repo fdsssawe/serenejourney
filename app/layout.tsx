@@ -20,9 +20,11 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
 
-  const {checkAuth} = useStore()
+  const {checkAuth,getBlogs,getTags} = useStore()
 
   useEffect(()=>{
+    getBlogs()
+    getTags()
     if(localStorage.getItem('token')){
       checkAuth()
     }
