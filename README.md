@@ -26,10 +26,10 @@ SECRET = secret that will be used to generate jwt tokens by Next Auth
 1.  ### Authorization
     
     - [x] Auth service setup
-    - [ ] Mail verification service setup
+    - [x] Mail verification service setup
     - [x] Registration , login , logout functionality in auth service
     - [x] Auth routes on server
-    - [ ] Frontend auth handle
+    - [x] Frontend auth handle
     - [ ] Unactivated account handle
     - [ ] Unactivated account limitation
     - [x] OAuth(Google)
@@ -39,7 +39,7 @@ SECRET = secret that will be used to generate jwt tokens by Next Auth
     - [x] Users manipulation
     - [ ] Travel packages manipulation
     - [ ] Hotels manipulation
-    - [ ] Manageble blog
+    - [x] Manageble blog
     - [ ] Statistic
     - [ ] Payment gateway
 

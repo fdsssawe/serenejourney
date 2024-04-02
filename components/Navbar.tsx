@@ -49,20 +49,20 @@ const Navbar = () => {
                         <Logo/> 
                     </div>
                     <div className="w-[68%] flex justify-center">
-                        <div className="h-1/2 w-full border-b-[2px] border-acc flex pl-[8%] justify-end">
-                            <button className=" text-text lg:text-[1.05rem] font-normal border-l-[2px] border-acc px-2 inline-flex items-center"> <MapPin size="18" className="mr-1"/> Locations</button>
-                            <button className=" text-text lg:text-[1.05rem] font-normal border-x-[2px] border-acc px-2 inline-flex items-center"> <Headphones size="18" className="mr-1"/> Care  </button>
+                        <div className="h-1/2 w-full cursor-pointer  border-b-[2px] border-acc flex pl-[8%] justify-end">
+                            <button className=" text-text  cursor-pointer lg:text-[1.05rem] font-normal border-l-[2px] border-acc px-2 inline-flex items-center"> <MapPin size="18" className="mr-1"/> Locations</button>
+                            <button className=" text-text  cursor-pointer lg:text-[1.05rem] font-normal border-x-[2px] border-acc px-2 inline-flex items-center"> <Headphones size="18" className="mr-1"/> Care  </button>
                             {states.isAuth ? 
-                            <div className=" text-text lg:text-[1.05rem] font-normal border-r-[2px] border-acc px-2 inline-flex items-center mr-[35%]" onClick={()=> {
+                            <div className=" text-text cursor-pointer lg:text-[1.05rem] font-normal border-r-[2px] border-acc px-2 inline-flex items-center mr-[35%]" onClick={()=> {
                             states.logout() 
                             router.push("/")
                             }}>
                                 Log Out <LogOut size="18" className="ml-2"/>
                             </div>
                             :
-                            <div className=" text-text lg:text-[1.05rem] font-normal border-r-[2px] border-acc px-2 inline-flex items-center mr-[35%]" onClick={() => router.push("/login")}>
+                            <div className=" text-text lg:text-[1.05rem] font-normal cursor-pointer w-[15rem] border-r-[2px] border-acc px-2 inline-flex items-center mr-[35%]" onClick={() => router.push("/login")}>
                                 Sign In
-                                <LogIn size="18" />
+                                <LogIn size="18" className="ml-2"/>
                             </div>
                             }
                         </div>
@@ -70,12 +70,12 @@ const Navbar = () => {
                 </div>
                 <div className="flex flex-row-reverse">
                     <div className="w-[40%] justify-between flex mr-[22%]">
-                        <button className=" text-text lg:text-base font-[600] " onClick={()=>router.push("/administration/users")}>User list</button>
-                        <button className=" text-text lg:text-base font-[600]">Hotels</button>
-                        <button className=" text-text lg:text-base font-[600]">Packages</button>
-                        <button className=" text-text lg:text-base font-[600]">Flights</button>
-                        <button className=" text-text lg:text-base font-[600]">Cruise</button>
-                        <button className=" text-text lg:text-base font-[600]" onClick={()=>router.push("/blogs")}>Blogs </button>
+                        <button className=" text-text lg:text-base font-[600] cursor-pointer" onClick={()=>router.push("/administration/users")}>User list</button>
+                        <button className=" text-text lg:text-base font-[600] cursor-pointer">Hotels</button>
+                        <button className=" text-text lg:text-base font-[600] cursor-pointer">Packages</button>
+                        <button className=" text-text lg:text-base font-[600] cursor-pointer">Flights</button>
+                        <button className=" text-text lg:text-base font-[600] cursor-pointer">Cruise</button>
+                        <button className=" text-text lg:text-base font-[600] cursor-pointer" onClick={()=>router.push("/blogs")}>Blogs </button>
                     </div>
                 </div>
             </div>
