@@ -20,7 +20,7 @@ GOOGLE_CLIENT_ID : creat credential in you google cloud console dashboard , copy
 GOOGLE_CLIENT_SECRET : creat credential in you google cloud console dashboard , copy client secret
 NEXTAUTH_URL : http://localhost:3000 || url of your appliaction
 DATABASE_URL : connect url to your MongoDB cluster
-SECRET = secret that will be used to generate jwt tokens by Next Auth
+NEXTAUTH_SECRET = secret that will be used to generate jwt tokens by Next Auth
 
 # Project decomposition
 1.  ### Authorization
